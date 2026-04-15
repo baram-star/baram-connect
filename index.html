@@ -542,7 +542,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       <div class="nav-item" onclick="goPage('blog',this)">
         <span class="nav-item-icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
-        </span> 생각<sup class="nav-sup" style="font-size:1em;vertical-align:baseline;">삶/책/교육단상</sup>
+        </span> 생각<sup class="nav-sup">삶/책/교육단상</sup>
       </div>
       <div class="nav-item" onclick="goPage('consult',this)">
         <span class="nav-item-icon">
@@ -871,15 +871,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
     <div class="subpage-hero">
       <div class="subpage-hero-icon" style="background:var(--gold-l);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
       <div class="subpage-hero-texts">
-        <div class="subpage-hero-name">교육상담·컨설팅</div>
+        <div class="subpage-hero-name">진로상담·교육컨설팅</div>
         <div class="subpage-hero-desc">공교육 및 대안학교에서 33년간 교육현장을 지켜온 교육전문가의 진실·성실·절실한 동행</div>
       </div>
     </div>
 
     <div class="chip-tabs" id="consult-tabs" style="margin-bottom:0;gap:6px;">
       <div class="chip chip-sq active" onclick="setConsultTab(this,'personal')">개인 상담</div>
-      <div class="chip chip-sq" onclick="setConsultTab(this,'org')">학교·기관</div>
-      <div class="chip chip-sq" onclick="setConsultTab(this,'online')">온라인</div>
     </div>
 
     <!-- ─── 탭1: 개인 상담 ─── -->
@@ -946,56 +944,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       </div>
     </div>
 
-    <!-- ─── 탭2: 학교·기관 ─── -->
-    <div id="consult-org" class="consult-tab" style="display:none">
-      <div class="prog-list" style="margin-top:12px">
-        <div class="prog-card">
-          <div class="prog-card-icon prog-icon-purple"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="13" rx="1"/><path d="M8 21V8"/><path d="M16 21V8"/><rect x="8" y="2" width="8" height="6" rx="1"/></svg></div>
-          <div class="prog-card-body">
-            <div class="prog-card-name">교사·수업 컨설팅</div>
-            <div class="prog-card-desc">독서·글쓰기 수업 설계, 교사 연수, 수업 방법론 코칭. 국어·사회·도덕 과목 연계 가능.</div>
-
-          </div>
-        </div>
-        <div class="prog-card">
-          <div class="prog-card-icon" style="background:#e8f4fd;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-          <div class="prog-card-body">
-            <div class="prog-card-name">교육과정 설계 자문</div>
-            <div class="prog-card-desc">학교·기관의 독서교육 프로그램, 독서·논술 교육과정 설계 자문 및 워크숍 진행.</div>
-
-          </div>
-        </div>
-        <div class="prog-card">
-          <div class="prog-card-icon" style="background:#e6f7f6;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
-          <div class="prog-card-body">
-            <div class="prog-card-name">강연·특강</div>
-            <div class="prog-card-desc">학부모 대상 독서교육 특강, 학생 대상 논술·글쓰기 캠프, 교사 대상 연수 강의.</div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ─── 탭3: 온라인 ─── -->
-    <div id="consult-online" class="consult-tab" style="display:none">
-      <div style="margin:14px 16px 4px;background:#eaf3fb;border-radius:12px;padding:14px 15px;font-size:.82rem;color:var(--navy);line-height:1.85;">
-        <strong>온라인 상담 안내</strong><br>
-        Zoom 또는 Google Meet 를 활용해 전국 어디서나 비대면 상담 가능
-      </div>
-      <div class="info-card" style="margin:12px 16px">
-        <div class="info-card-title">온라인 상담 절차</div>
-        <div style="display:flex;align-items:center;gap:8px;padding:12px 0;font-size:.88rem;font-weight:600;color:var(--navy);flex-wrap:wrap;">
-          <span style="background:#d4f5f1;color:var(--teal);padding:6px 14px;border-radius:8px;">신청서 제출</span>
-          <span style="color:var(--sub);">→</span>
-          <span style="background:#e6f7f6;color:var(--teal-d);padding:6px 14px;border-radius:8px;">일정 조율</span>
-          <span style="color:var(--sub);">→</span>
-          <span style="background:#f5f5f8;color:#666;padding:6px 14px;border-radius:8px;">온라인 상담 진행</span>
-        </div>
-      </div>
-      <div style="padding:0 16px 24px;display:flex;justify-content:flex-end;">
-        <button onclick="setConsultTab(document.querySelector('#consult-tabs .chip'),'personal')" style="padding:12px 24px;background:var(--gold);color:#fff;border:none;border-radius:12px;font-size:.95rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;">제출<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 10 4 15 9 20"/><path d="M20 4v7a4 4 0 0 1-4 4H4"/></svg></button>
-      </div>
-    </div>
   </section>
 
   <!-- ── 바람생각 ── -->
