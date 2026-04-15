@@ -542,7 +542,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       <div class="nav-item" onclick="goPage('blog',this)">
         <span class="nav-item-icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
-        </span> 생각<sup class="nav-sup">삶/책/교육단상</sup>
+        </span> 생각<sup class="nav-sup" style="font-size:1em;vertical-align:baseline;">삶/책/교육단상</sup>
       </div>
       <div class="nav-item" onclick="goPage('consult',this)">
         <span class="nav-item-icon">
@@ -769,10 +769,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 
     <!-- 탭 메뉴 -->
     <div class="chip-tabs" id="academy-tabs" style="margin-bottom:0;gap:6px;">
-      <div class="chip chip-sq active" onclick="setAcademyTab(this,'alarm')">🔔 알림사항</div>
-      <div class="chip chip-sq" onclick="setAcademyTab(this,'schedule')">🗓️ 세미나 일정</div>
-      <div class="chip chip-sq" onclick="setAcademyTab(this,'materials')">📂 읽기자료실</div>
-      <div class="chip chip-sq" onclick="setAcademyTab(this,'apply')">✏️ 참가신청</div>
+      <div class="chip chip-sq active" onclick="setAcademyTab(this,'alarm')">알림사항</div>
+      <div class="chip chip-sq" onclick="setAcademyTab(this,'schedule')">세미나 일정</div>
+      <div class="chip chip-sq" onclick="setAcademyTab(this,'materials')">읽기자료실</div>
+      <div class="chip chip-sq" onclick="setAcademyTab(this,'apply')">참가신청</div>
     </div>
 
     <!-- ─── 알림사항 탭 ─── -->
@@ -1146,6 +1146,21 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
           src="https://maps.google.com/maps?q=경기도+화성시+동탄구+문화센터로+75&output=embed&z=15"
           width="100%" height="220" style="border:0;display:block;" allowfullscreen="" loading="lazy"></iframe>
       </div>
+    </div>
+
+    <!-- WATCH 앱 링크 -->
+    <div style="padding:0 16px 20px;">
+      <a href="https://watch-habit.vercel.app" target="_blank" rel="noopener noreferrer"
+        style="display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#0a7c72 0%,#0D9488 60%,#14b8a6 100%);border-radius:16px;padding:18px 20px;text-decoration:none;color:#fff;box-shadow:0 4px 18px rgba(13,148,136,.3);">
+        <div style="width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <span style="font-size:1.4rem;font-weight:900;">W</span>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:.95rem;font-weight:800;margin-bottom:3px;">WATCH 생활습관 앱</div>
+          <div style="font-size:.75rem;opacity:.85;line-height:1.5;">수면·학습·독서·놀이·성찰을 매일 기록하는<br>바람나무숲 청소년 루틴 앱</div>
+        </div>
+        <div style="font-size:1.2rem;opacity:.8;flex-shrink:0;">›</div>
+      </a>
     </div>
   </section>
 
