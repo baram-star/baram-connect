@@ -1875,6 +1875,10 @@ function enterAdminMode() {
   document.getElementById('admin-badge').style.display = 'flex';
   goAdminPage('notices', document.querySelector('.admin-nav-item'));
   closeSidebar();
+  // URL을 /admin으로 변경 (새로고침 없이)
+  if (window.location.pathname !== '/admin') {
+    history.replaceState(null, '', '/admin');
+  }
 }
 
 async function adminLogout() {
@@ -1884,6 +1888,7 @@ async function adminLogout() {
   document.getElementById('sidebar-admin-nav').style.display = 'none';
   document.getElementById('admin-badge').style.display = 'none';
   document.querySelectorAll('.admin-page').forEach(p => p.classList.remove('active'));
+  history.replaceState(null, '', '/');
   goPage('home', null);
   showToast('로그아웃 되었습니다');
 }
@@ -2368,11 +2373,17 @@ document.addEventListener('DOMContentLoaded', () => {
   loadHomeNotices();
   loadHomeBlog();
   loadDaumCourses();
-  // 세션 유지 확인
+  // 세션 유지 확인 + /admin URL 자동 처리
   sb.auth.getSession().then(({ data }) => {
     if (data.session) {
       isAdmin = true;
       enterAdminMode();
+    } else if (window.location.pathname === '/admin') {
+      // /admin 경로로 직접 접속 시 로그인 모달 자동 오픈
+      setTimeout(() => {
+        openModal('modal-admin-login');
+        document.getElementById('admin-pw')?.focus();
+      }, 300);
     }
   });
 });
