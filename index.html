@@ -177,7 +177,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
   font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
   color:rgba(255,255,255,.7);margin-bottom:8px;font-weight:500;
 }
-.welcome-title{font-size:1.35rem;font-weight:800;margin-bottom:5px;line-height:1.38;}
+.welcome-title{font-size:1.35rem;font-weight:800;margin-bottom:5px;line-height:1.6;}
 .welcome-desc{font-size:.82rem;color:rgba(255,255,255,.78);line-height:1.65;}
 .welcome-date{
   margin-top:14px;font-size:.82rem;color:rgba(255,255,255,.6);
@@ -213,7 +213,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
   background:var(--card);border-radius:var(--radius);
   border:1.5px solid var(--border);
   padding:11px 14px;display:flex;gap:12px;align-items:center;
-  box-shadow:var(--shadow);cursor:pointer;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);cursor:pointer;
   transition:all var(--trans);
 }
 .prog-card:hover{border-color:var(--mint);transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,196,180,.13);}
@@ -351,10 +351,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
   box-shadow:var(--shadow);
 }
 .form-group{margin-bottom:14px;}
-.form-label{font-size:.78rem;font-weight:700;color:var(--navy);margin-bottom:5px;display:block;}
+.form-label{font-size:.78rem;font-weight:700;color:var(--navy);margin-bottom:3px;display:block;}
 .form-input,.form-select,.form-textarea{
   width:100%;padding:11px 13px;border-radius:9px;
-  border:1.5px solid var(--border);background:#fff;
+  border:1.5px solid var(--border);background:#f8f9fa;
   font-family:inherit;font-size:.84rem;color:var(--navy);
   transition:border-color var(--trans);
 }
@@ -373,16 +373,17 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 /* ══ FAQ ══ */
 .faq-item{
   background:var(--card);border-radius:var(--radius);
-  border:1px solid var(--border);margin-bottom:8px;overflow:hidden;
+  border:1px solid var(--border);margin-bottom:16px;overflow:hidden;
 }
 .faq-q{
   padding:14px 16px;font-size:.84rem;font-weight:600;color:var(--navy);
   display:flex;justify-content:space-between;align-items:center;
-  cursor:pointer;transition:background var(--trans);
+  cursor:pointer;transition:background var(--trans);gap:12px;
 }
 .faq-q:hover{background:#f6fafa;}
-.faq-arrow{color:var(--mint);transition:transform var(--trans);font-size:.85rem;}
+.faq-arrow{color:var(--teal);transition:transform var(--trans);flex-shrink:0;display:flex;align-items:center;}
 .faq-item.open .faq-arrow{transform:rotate(180deg);}
+.faq-item.open .faq-q{color:var(--teal);}
 .faq-a{
   display:none;padding:12px 16px 14px;
   font-size:.79rem;color:var(--sub);line-height:1.72;
@@ -411,6 +412,65 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
   transition:all var(--trans);
 }
 .float-cta:hover{background:#d08a10;transform:translateY(-2px);}
+
+/* ══ APPLY MODAL (신청 바텀시트) ══ */
+.apply-modal{
+  display:none;position:fixed;inset:0;z-index:350;
+  background:rgba(0,0,0,.45);
+  align-items:flex-end;justify-content:center;
+}
+.apply-modal.open{display:flex;}
+.apply-modal-box{
+  background:#fff;border-radius:20px 20px 0 0;
+  width:100%;max-width:560px;
+  max-height:88vh;overflow-y:auto;
+  padding:8px 20px 48px;
+  animation:slideUpSheet .22s ease;
+}
+@keyframes slideUpSheet{from{transform:translateY(100%);}to{transform:translateY(0);}}
+.apply-modal-handle{
+  width:40px;height:4px;background:#dde3e3;border-radius:2px;
+  margin:12px auto 20px;
+}
+.apply-modal-title{font-size:1.02rem;font-weight:800;color:var(--navy);margin-bottom:18px;
+  display:flex;align-items:center;justify-content:space-between;}
+.apply-modal-close{font-size:1.4rem;color:var(--sub);background:none;border:none;
+  cursor:pointer;line-height:1;padding:4px;}
+
+/* ══ FLOAT APPLY BTN ══ */
+.float-apply{
+  display:none;position:fixed;bottom:22px;left:50%;transform:translateX(-50%);
+  z-index:100;background:var(--teal);color:#fff;
+  padding:14px 40px;border-radius:50px;
+  font-size:.9rem;font-weight:700;
+  box-shadow:0 6px 24px rgba(0,147,138,.38);
+  border:none;cursor:pointer;white-space:nowrap;
+  transition:all .2s;
+}
+.float-apply.visible{display:block;}
+.float-apply:hover{transform:translateX(-50%) translateY(-2px);box-shadow:0 8px 28px rgba(0,147,138,.45);}
+@media(min-width:768px){.float-apply{left:calc(var(--sidebar-w)/2 + 50%);}}
+
+/* ══ 상담 유형 카드 선택 인터랙션 ══ */
+.type-select-card{cursor:pointer;transition:all var(--trans);user-select:none;}
+.type-select-card:hover{border-color:rgba(0,196,180,.5)!important;}
+.type-select-card.selected{
+  border-color:var(--teal)!important;
+  background:linear-gradient(135deg,#f0faf9 0%,#e6f7f6 100%)!important;
+  box-shadow:0 0 0 3px rgba(0,196,180,.15),0 4px 20px rgba(0,0,0,.05)!important;
+}
+.type-select-card.selected .prog-card-name{color:var(--teal-d);}
+.type-select-check{
+  display:none;width:20px;height:20px;border-radius:50%;
+  background:var(--teal);color:#fff;font-size:.7rem;flex-shrink:0;
+  align-items:center;justify-content:center;
+}
+.type-select-card.selected .type-select-check{display:flex;}
+
+/* ══ NAV ICON (solid brand color) ══ */
+.nav-item-icon{font-size:.95rem;width:20px;text-align:center;flex-shrink:0;
+  color:var(--teal);opacity:.8;display:flex;align-items:center;justify-content:center;}
+.nav-item:hover .nav-item-icon,.nav-item.active .nav-item-icon{opacity:1;color:var(--teal);}
 
 /* ══ TOAST ══ */
 .toast{
@@ -524,34 +584,34 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
     <div class="sidebar-section">
       <div class="nav-item active" onclick="goPage('home',this)">
         <span class="nav-item-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L4 9v12h5v-7h6v7h5V9L12 3z"/></svg>
         </span> 홈
       </div>
     </div>
     <div class="sidebar-section">
       <div class="nav-item" onclick="goPage('academy',this)">
         <span class="nav-item-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1z"/></svg>
         </span> 서원<sup class="nav-sup">인문학교실</sup>
       </div>
       <div class="nav-item" onclick="goPage('daum',this)">
         <span class="nav-item-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
         </span> 공부<sup class="nav-sup">국어/논술/독서 전문</sup>
       </div>
       <div class="nav-item" onclick="goPage('blog',this)">
         <span class="nav-item-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
         </span> 생각<sup class="nav-sup">삶/책/교육단상</sup>
       </div>
       <div class="nav-item" onclick="goPage('consult',this)">
         <span class="nav-item-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
         </span> 상담<sup class="nav-sup">진로상담/교육컨설팅</sup>
       </div>
       <div class="nav-item" onclick="goPage('faq',this)">
         <span class="nav-item-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
         </span> FAQ<sup class="nav-sup">궁금한 점 문의하기</sup>
       </div>
       <div class="nav-item" onclick="goPage('about',this)">
@@ -605,7 +665,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
   <!-- ── 홈 ── -->
   <section class="page active" id="page-home">
     <div class="welcome-card">
-      <div class="welcome-title" style="display:inline-flex;flex-direction:column;align-items:stretch;"><span style="font-size:.78rem;font-weight:400;opacity:.82;display:block;">자유로운 바람처럼 뿌리깊은 나무같이</span><span style="font-size:1.45rem;font-weight:800;display:block;margin-top:3px;white-space:nowrap;">청소년을 위한 교육연구소</span></div>
+      <div class="welcome-title" style="display:flex;flex-direction:column;align-items:flex-start;">
+        <span style="font-size:.72rem;font-weight:300;letter-spacing:.06em;opacity:.75;display:block;line-height:1.6;">자유로운 바람처럼 뿌리깊은 나무같이</span>
+        <span style="font-size:1.5rem;font-weight:800;display:block;line-height:1.6;letter-spacing:-.02em;">청소년을 위한 교육연구소</span>
+        <span style="font-size:.82rem;font-weight:500;opacity:.88;display:block;margin-top:2px;line-height:1.6;">바람나무숲</span>
+      </div>
       <div class="welcome-date">📅 <span id="today-date"></span></div>
     </div>
 
@@ -696,66 +760,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       </div>
     </div>
 
-    <!-- 수강 신청 폼 -->
-    <div id="daum-apply-section">
-      <div style="padding:0 16px 28px">
-        <div class="form-group">
-          <label class="form-label">학생 이름 *</label>
-          <input class="form-input" type="text" id="daum-name" placeholder="이름을 입력하세요">
-        </div>
-        <div class="form-group">
-          <label class="form-label">학부모 연락처 *</label>
-          <input class="form-input" type="tel" id="daum-phone" placeholder="010-0000-0000">
-        </div>
-        <div class="form-group">
-          <label class="form-label">학교 / 학년 *</label>
-          <input class="form-input" type="text" id="daum-school" placeholder="예: OO초등학교 5학년 · OO중학교 2학년">
-        </div>
-        <div class="form-group">
-          <label class="form-label">희망 과목</label>
-          <select class="form-input" id="daum-subject">
-            <option value="">희망 과목을 선택하세요</option>
-            <option value="독서글쓰기">독서 & 글쓰기 (초등)</option>
-            <option value="학습독서논술">학습 독서 & 논술 (중등)</option>
-            <option value="내신국어">내신 국어 집중 (중·고등)</option>
-            <option value="수능국어">수능 국어 완성 (고등)</option>
-            <option value="논술입시">논술 입시 대비 (고등)</option>
-            <option value="자기소개서">자기소개서 & 학생부 (고등)</option>
-            <option value="상담후결정">상담 후 결정</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">희망 수업 시간대</label>
-          <select class="form-input" id="daum-time">
-            <option value="">선호 시간대를 선택하세요</option>
-            <option value="평일오전">평일 오전 (10:00~13:00)</option>
-            <option value="평일오후">평일 오후 (14:00~18:00)</option>
-            <option value="평일저녁">평일 저녁 (18:00~21:00)</option>
-            <option value="토요일">토요일 (10:00~18:00)</option>
-            <option value="협의">협의 가능</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">참여 경로</label>
-          <select class="form-input" id="daum-route">
-            <option value="">어떻게 알게 되셨나요?</option>
-            <option value="지인추천">지인 추천</option>
-            <option value="SNS">SNS (인스타그램·블로그 등)</option>
-            <option value="검색">인터넷 검색</option>
-            <option value="기존참여">이전 참여 경험</option>
-            <option value="기타">기타</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">현재 상황 & 상담 요청 사항 *</label>
-          <textarea class="form-input" id="daum-memo" rows="3" placeholder="학생의 현재 학습 상황, 어려운 점, 원하는 목표 등을 자유롭게 써 주세요." style="resize:none"></textarea>
-        </div>
-        <div style="display:flex;justify-content:flex-end;margin-top:8px;">
-          <button type="button" onclick="submitDaumApply()" style="padding:12px 24px;background:var(--teal);color:#fff;border:none;border-radius:12px;font-size:.95rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;">제출<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 10 4 15 9 20"/><path d="M20 4v7a4 4 0 0 1-4 4H4"/></svg></button>
-        </div>
-
-      </div>
-    </div>
+    <!-- 수강 신청 폼 → 플로팅 버튼 클릭 시 바텀시트로 표시 -->
   </section>
 
   <section class="page" id="page-academy">
@@ -878,64 +883,31 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 
     <!-- 상담 내용 -->
     <div id="consult-personal" class="consult-tab">
-      <div class="sec-head" style="margin-top:8px;"><div class="sec-title">상담 유형</div></div>
+      <div class="sec-head" style="margin-top:8px;"><div class="sec-title">상담 유형 <span style="font-size:.72rem;font-weight:400;color:var(--sub);margin-left:4px;">원하는 유형을 선택하세요</span></div></div>
       <div class="prog-list">
-        <div class="prog-card">
-          <div class="prog-card-icon prog-icon-gold"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <div class="prog-card type-select-card" data-type="독서논술설계" onclick="selectConsultType(this)">
+          <div class="prog-card-icon prog-icon-gold"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="color:var(--teal)"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1z"/></svg></div>
           <div class="prog-card-body">
             <div class="prog-card-name">독서·논술 교육 설계</div>
-            <div class="prog-card-desc">자녀 수준에 맞는 독서 로드맵과 논술 교육 방향 상담. 단계별 도서 선정, 글쓰기 지도 방법 안내.</div>
-
+            <div class="prog-card-desc">자녀 수준에 맞는 독서 로드맵과 논술 교육 방향 상담</div>
           </div>
+          <span class="type-select-check">✓</span>
         </div>
-        <div class="prog-card">
-          <div class="prog-card-icon prog-icon-teal"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <div class="prog-card type-select-card" data-type="진로학습" onclick="selectConsultType(this)">
+          <div class="prog-card-icon prog-icon-teal"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="color:var(--teal)"><path d="M12 3L4 9v12h5v-7h6v7h5V9L12 3z"/></svg></div>
           <div class="prog-card-body">
             <div class="prog-card-name">진로·학습 상담</div>
-            <div class="prog-card-desc">중·고생 대상 학습 방법론, 진로 방향, 내신·수능·논술 전략. 자기 주도 학습 설계 포함.</div>
-
+            <div class="prog-card-desc">학습 방법론, 진로 방향, 내신·수능·논술 전략 설계</div>
           </div>
+          <span class="type-select-check">✓</span>
         </div>
-        <div class="prog-card">
-          <div class="prog-card-icon" style="background:#f3e8ff;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div class="prog-card type-select-card" data-type="교육방향설계" onclick="selectConsultType(this)">
+          <div class="prog-card-icon" style="background:#f3e8ff;"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="color:var(--teal)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg></div>
           <div class="prog-card-body">
             <div class="prog-card-name">자녀 교육 방향 설계</div>
-            <div class="prog-card-desc">자녀의 기질·관심·강점을 파악하고 장기적 교육 방향과 환경을 함께 설계합니다.</div>
-
+            <div class="prog-card-desc">기질·관심·강점을 파악하고 장기 교육 방향을 함께 설계</div>
           </div>
-        </div>
-      </div>
-
-      <div class="sec-head"><div class="sec-title">상담 신청서</div></div>
-      <div style="padding:0 16px 28px">
-        <div class="form-group">
-          <label class="form-label">이름 *</label>
-          <input class="form-input" type="text" id="consult-name" placeholder="이름을 입력하세요">
-        </div>
-        <div class="form-group">
-          <label class="form-label">연락처 *</label>
-          <input class="form-input" type="tel" id="consult-phone" placeholder="010-0000-0000">
-        </div>
-        <div class="form-group">
-          <label class="form-label">자녀 학교·학년</label>
-          <input class="form-input" type="text" id="consult-child" placeholder="예: OO중학교 1학년">
-        </div>
-        <div class="form-group">
-          <label class="form-label">상담 희망 유형</label>
-          <select class="form-input" id="consult-type">
-            <option value="">상담 유형을 선택하세요</option>
-            <option value="독서논술설계">독서·논술 교육 설계</option>
-            <option value="진로학습">진로·학습 상담</option>
-            <option value="교육방향설계">자녀 교육 방향 설계</option>
-            <option value="기타">기타 (신청서에 기재)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">상담 희망 내용 *</label>
-          <textarea class="form-input" id="consult-memo" rows="3" placeholder="상담받고 싶은 내용, 자녀의 현재 상황, 고민 등을 자유롭게 적어주세요." style="resize:none"></textarea>
-        </div>
-        <div style="display:flex;justify-content:flex-end;margin-top:8px;">
-          <button type="button" onclick="submitConsultApply()" style="padding:12px 24px;background:var(--gold);color:#fff;border:none;border-radius:12px;font-size:.95rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;">제출<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 10 4 15 9 20"/><path d="M20 4v7a4 4 0 0 1-4 4H4"/></svg></button>
+          <span class="type-select-check">✓</span>
         </div>
       </div>
     </div>
@@ -1114,31 +1086,31 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       <div class="sec-title"><svg style="vertical-align:middle;margin-right:4px;" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> <span class="sec-accent">자주 묻는 질문</span></div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">다움공부는 학원인가요? <span class="faq-arrow">▾</span></div>
+      <div class="faq-q">다움공부는 학원인가요? <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
       <div class="faq-a">다움공부는 교습소 등록 형태의 소규모 전문 교육기관입니다. 소그룹·개인 맞춤 수업을 원칙으로 하며, 주입식 문제풀이보다 생각하는 힘과 표현력을 기르는 데 집중합니다.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">수업 대상 학년은? <span class="faq-arrow">▾</span></div>
+      <div class="faq-q">수업 대상 학년은? <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
       <div class="faq-a">초등 4학년부터 고등 3학년까지 모집합니다. 수준별 반 편성을 통해 초등·중등·고등 과정을 분리 운영하며, 첫 상담 후 반 배치가 이루어집니다.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">교육상담은 유료인가요? <span class="faq-arrow">▾</span></div>
+      <div class="faq-q">교육상담은 유료인가요? <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
       <div class="faq-a">초회 30분 상담은 무료로 진행됩니다. 심층 상담(60~90분)은 유료이며, 상담 유형에 따라 비용이 다릅니다. 사전 예약 후 안내받으실 수 있습니다.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">인문학서원은 성인도 참여할 수 있나요? <span class="faq-arrow">▾</span></div>
+      <div class="faq-q">인문학서원은 성인도 참여할 수 있나요? <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
       <div class="faq-a">네, 중학생 이상이면 성인도 참여 가능합니다. 청소년과 성인이 함께 텍스트를 읽고 토론하는 방식으로 운영되어 서로 다른 시각을 나누는 것이 큰 장점입니다.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">동탄 외 지역도 참여 가능한가요? <span class="faq-arrow">▾</span></div>
+      <div class="faq-q">동탄 외 지역도 참여 가능한가요? <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
       <div class="faq-a">교습소 수업은 대면이 원칙이나, 교육상담 및 인문학서원 일부 세미나는 온라인으로도 진행 가능합니다. 원거리 거주자는 사전 문의 부탁드립니다.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">수업료는 어떻게 되나요? <span class="faq-arrow">▾</span></div>
+      <div class="faq-q">수업료는 어떻게 되나요? <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
       <div class="faq-a">수업료는 과목·시간·인원에 따라 다르며, 개별 상담 후 안내드립니다. 첫 상담은 무료이므로 부담 없이 문의해 주세요.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">수업 일정을 바꿀 수 있나요? <span class="faq-arrow">▾</span></div>
+      <div class="faq-q">수업 일정을 바꿀 수 있나요? <span class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
       <div class="faq-a">불가피한 경우 수업 48시간 전까지 연락 주시면 일정을 조율할 수 있습니다. 단, 당일 취소는 수업이 진행된 것으로 처리됩니다.</div>
     </div>
     <div style="padding:8px 16px 24px">
@@ -1557,6 +1529,43 @@ function goPage(id, navEl){
   if(navEl) navEl.classList.add('active');
   window.scrollTo(0,0);
   closeSidebar();
+  // 플로팅 신청 버튼 — daum/consult 페이지에서만 표시
+  const floatBtn = document.getElementById('float-apply-btn');
+  if(floatBtn){
+    const showPages = ['daum','consult'];
+    const labels = {daum:'✏️ 수강 신청', consult:'💬 상담 신청'};
+    if(showPages.includes(id)){
+      floatBtn.textContent = labels[id] || '✏️ 신청하기';
+      floatBtn.dataset.page = id;
+      floatBtn.classList.add('visible');
+    } else {
+      floatBtn.classList.remove('visible');
+    }
+  }
+}
+
+/* ── 신청 모달 열기/닫기 ── */
+function openApplyModal(){
+  const page = document.getElementById('float-apply-btn')?.dataset.page;
+  const modalId = page === 'consult' ? 'modal-consult-apply' : 'modal-daum-apply';
+  document.getElementById(modalId)?.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeApplyModal(id){
+  document.getElementById(id)?.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ── 상담 유형 카드 선택 ── */
+function selectConsultType(el){
+  document.querySelectorAll('.type-select-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  const type = el.dataset.type;
+  // 신청 모달의 select 자동 선택
+  const sel = document.getElementById('consult-type');
+  if(sel) sel.value = type;
+  // 0.25초 후 신청 모달 열기
+  setTimeout(() => openApplyModal(), 280);
 }
 
 /* ── 칩 탭 ── */
@@ -1678,6 +1687,8 @@ async function submitConsultApply() {
       name, phone, child_name: child, consult_type: type, memo
     });
     if (error) throw error;
+    closeApplyModal('modal-consult-apply');
+    document.querySelectorAll('.type-select-card').forEach(c => c.classList.remove('selected'));
     showToast('✅ 상담 신청이 접수되었습니다! 1~2일 이내 연락드리겠습니다.');
     fields.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
   } catch(e) { showToast('오류가 발생했습니다. 전화로 문의해주세요.'); }
@@ -1721,6 +1732,7 @@ async function submitDaumApply() {
       subject, preferred_time: time, route, memo
     });
     if (error) throw error;
+    closeApplyModal('modal-daum-apply');
     showToast('✅ 신청이 접수되었습니다! 2일 이내 연락드리겠습니다.');
     fields.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
   } catch(e) {
@@ -2366,6 +2378,110 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 </script>
+<!-- ── 플로팅 신청 버튼 ── -->
+<button class="float-apply" id="float-apply-btn" onclick="openApplyModal()">✏️ 신청하기</button>
+
+<!-- ── 뿌리깊은공부 수강신청 바텀시트 ── -->
+<div class="apply-modal" id="modal-daum-apply" onclick="if(event.target===this)closeApplyModal('modal-daum-apply')">
+  <div class="apply-modal-box">
+    <div class="apply-modal-handle"></div>
+    <div class="apply-modal-title">
+      뿌리깊은공부 수강신청
+      <button class="apply-modal-close" onclick="closeApplyModal('modal-daum-apply')">×</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">학생 이름 *</label>
+      <input class="form-input" type="text" id="daum-name" placeholder="이름을 입력하세요">
+    </div>
+    <div class="form-group">
+      <label class="form-label">학부모 연락처 *</label>
+      <input class="form-input" type="tel" id="daum-phone" placeholder="010-0000-0000">
+    </div>
+    <div class="form-group">
+      <label class="form-label">학교 / 학년 *</label>
+      <input class="form-input" type="text" id="daum-school" placeholder="예: OO초등학교 5학년 · OO중학교 2학년">
+    </div>
+    <div class="form-group">
+      <label class="form-label">희망 과목</label>
+      <select class="form-input" id="daum-subject">
+        <option value="">희망 과목을 선택하세요</option>
+        <option value="독서글쓰기">독서 &amp; 글쓰기 (초등)</option>
+        <option value="학습독서논술">학습 독서 &amp; 논술 (중등)</option>
+        <option value="내신국어">내신 국어 집중 (중·고등)</option>
+        <option value="수능국어">수능 국어 완성 (고등)</option>
+        <option value="논술입시">논술 입시 대비 (고등)</option>
+        <option value="자기소개서">자기소개서 &amp; 학생부 (고등)</option>
+        <option value="상담후결정">상담 후 결정</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">희망 수업 시간대</label>
+      <select class="form-input" id="daum-time">
+        <option value="">선호 시간대를 선택하세요</option>
+        <option value="평일오전">평일 오전 (10:00~13:00)</option>
+        <option value="평일오후">평일 오후 (14:00~18:00)</option>
+        <option value="평일저녁">평일 저녁 (18:00~21:00)</option>
+        <option value="토요일">토요일 (10:00~18:00)</option>
+        <option value="협의">협의 가능</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">참여 경로</label>
+      <select class="form-input" id="daum-route">
+        <option value="">어떻게 알게 되셨나요?</option>
+        <option value="지인추천">지인 추천</option>
+        <option value="SNS">SNS (인스타그램·블로그 등)</option>
+        <option value="검색">인터넷 검색</option>
+        <option value="기존참여">이전 참여 경험</option>
+        <option value="기타">기타</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">현재 상황 &amp; 상담 요청 사항 *</label>
+      <textarea class="form-input" id="daum-memo" rows="3" placeholder="학생의 현재 학습 상황, 어려운 점, 원하는 목표 등을 자유롭게 써 주세요." style="resize:none"></textarea>
+    </div>
+    <button class="form-submit" onclick="submitDaumApply()">수강 신청하기 →</button>
+  </div>
+</div>
+
+<!-- ── 상담신청 바텀시트 ── -->
+<div class="apply-modal" id="modal-consult-apply" onclick="if(event.target===this)closeApplyModal('modal-consult-apply')">
+  <div class="apply-modal-box">
+    <div class="apply-modal-handle"></div>
+    <div class="apply-modal-title">
+      상담 신청서
+      <button class="apply-modal-close" onclick="closeApplyModal('modal-consult-apply')">×</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">이름 *</label>
+      <input class="form-input" type="text" id="consult-name" placeholder="이름을 입력하세요">
+    </div>
+    <div class="form-group">
+      <label class="form-label">연락처 *</label>
+      <input class="form-input" type="tel" id="consult-phone" placeholder="010-0000-0000">
+    </div>
+    <div class="form-group">
+      <label class="form-label">자녀 학교·학년</label>
+      <input class="form-input" type="text" id="consult-child" placeholder="예: OO중학교 1학년">
+    </div>
+    <div class="form-group">
+      <label class="form-label">상담 희망 유형</label>
+      <select class="form-input" id="consult-type">
+        <option value="">상담 유형을 선택하세요</option>
+        <option value="독서논술설계">독서·논술 교육 설계</option>
+        <option value="진로학습">진로·학습 상담</option>
+        <option value="교육방향설계">자녀 교육 방향 설계</option>
+        <option value="기타">기타 (신청서에 기재)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">상담 희망 내용 *</label>
+      <textarea class="form-input" id="consult-memo" rows="3" placeholder="상담받고 싶은 내용, 자녀의 현재 상황, 고민 등을 자유롭게 적어주세요." style="resize:none"></textarea>
+    </div>
+    <button class="form-submit" style="background:linear-gradient(135deg,var(--gold) 0%,#f5b740 100%);" onclick="submitConsultApply()">상담 신청하기 →</button>
+  </div>
+</div>
+
 <!-- 수업안내 교과 모달 -->
 <div class="modal-overlay" id="modal-course">
   <div class="modal-box" style="max-width:380px;">
