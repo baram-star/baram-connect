@@ -542,7 +542,7 @@ renderSheetData();
    ════════════════════════════════════════════════════ */
 
 /* ── Supabase 초기화 ── */
-const sb = window.supabase.createClient('https://rdkuqqrkxwqakllncyaq.supabase.co', 'sb_publishable_xlzcfl2PWvEjGY_SIb2O2Q_GJhtkhHy');
+const sb = window.supabase.createClient('https://fgwuzbdopprzlkiyjhkm.supabase.co', 'sb_publishable_P9Nu1-xc7cdMDJ55MNHDUA_GHAVHdZd');
 
 /* ── 관리자 상태 ── */
 let isAdmin = false;
