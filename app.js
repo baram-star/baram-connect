@@ -51,7 +51,7 @@ const CONFIG = {
        2. 새 폼 생성 후 받은 URL 마지막 코드를 아래에 입력
        ※ formspreeId가 비어있으면 토스트 메시지만 표시됩니다 ── */
   formspreeId: "",  // 예: "xpzgkqrb"
-  scriptUrl: "https://script.google.com/macros/s/AKfycbw61j7k0ZZC2WDX_9SPD420dPjeA0tycXSl9St78FrPrKZw_yZZDXTtmTdahd4y1XM1/exec",
+  scriptUrl: "https://script.google.com/macros/s/AKfycbxamYg-5tRQ435kAoWkStSpCOQ0l9Vch-s-1QoU-CoyhBr64p2dtGIX_-lKhZDLc_qF/exec",
 
   /* ── 관리자 이메일 (Supabase 등록 이메일과 동일하게) ── */
   adminEmail: "baram@baramnamu.net"
