@@ -21,7 +21,7 @@ const CONFIG = {
   /* ── 메뉴 이름 (사이드바·헤더에 자동 반영) ── */
   menus: {
     home:    "홈",
-    daum:    "다움공부",
+    jaju:    "자주국어",
     academy: "인문학교실",
     consult: "교육상담",
     blog:    "칼럼·블로그",
@@ -245,12 +245,12 @@ function goPage(id, navEl){
   const target = document.getElementById('page-'+id);
   if(target) target.classList.add('active');
   if(id==='blog'){ loadBlogPosts('all'); }
-  if(id==='daum'){ loadDaumCourses(); }
+  if(id==='jaju'){ loadJajuCourses(); }
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   if(navEl) navEl.classList.add('active');
   window.scrollTo(0,0);
   closeSidebar();
-  // 플로팅 신청 버튼 — daum/consult 페이지에서만 표시
+  // 플로팅 신청 버튼 — jaju/consult 페이지에서만 표시
   const floatBtn = document.getElementById('float-apply-btn');
   if(floatBtn){
     const showPages = ['consult'];
@@ -268,7 +268,7 @@ function goPage(id, navEl){
 /* ── 신청 모달 열기/닫기 ── */
 function openApplyModal(){
   const page = document.getElementById('float-apply-btn')?.dataset.page;
-  const modalId = page === 'consult' ? 'modal-consult-apply' : 'modal-daum-apply';
+  const modalId = page === 'consult' ? 'modal-consult-apply' : 'modal-jaju-apply';
   document.getElementById(modalId)?.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -299,7 +299,7 @@ function setAcademyTab(el, tabId) {
   if (tab) tab.style.display = 'block';
 }
 
-/* ── 다움공부 탭 ── */
+/* ── 자주국어 탭 ── */
 function setConsultTab(el, tabId) {
   document.getElementById('consult-tabs').querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
@@ -321,16 +321,16 @@ function setBlogTab(el, tabId) {
 
 
 
-function scrollToDaumApply() {
-  const el = document.getElementById('daum-apply-section');
+function scrollToJajuApply() {
+  const el = document.getElementById('jaju-apply-section');
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function setDaumTab(el, tabId) {
-  document.getElementById('daum-tabs').querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+function setJajuTab(el, tabId) {
+  document.getElementById('jaju-tabs').querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
-  document.querySelectorAll('.daum-tab').forEach(t => t.style.display = 'none');
-  const tab = document.getElementById('daum-' + tabId);
+  document.querySelectorAll('.jaju-tab').forEach(t => t.style.display = 'none');
+  const tab = document.getElementById('jaju-' + tabId);
   if (tab) tab.style.display = 'block';
 }
 
@@ -432,20 +432,20 @@ async function submitContact() {
   } catch(e) { showToast('오류가 발생했습니다. 전화로 문의해주세요.'); }
 }
 
-async function submitDaumApply() {
-  const name    = (document.getElementById('daum-name')?.value || '').trim();
-  const phone   = (document.getElementById('daum-phone')?.value || '').trim();
-  const school  = (document.getElementById('daum-school')?.value || '').trim();
-  const subject = document.getElementById('daum-subject')?.value || '';
-  const time    = document.getElementById('daum-time')?.value || '';
-  const route   = document.getElementById('daum-route')?.value || '';
-  const memo    = (document.getElementById('daum-memo')?.value || '').trim();
+async function submitJajuApply() {
+  const name    = (document.getElementById('jaju-name')?.value || '').trim();
+  const phone   = (document.getElementById('jaju-phone')?.value || '').trim();
+  const school  = (document.getElementById('jaju-school')?.value || '').trim();
+  const subject = document.getElementById('jaju-subject')?.value || '';
+  const time    = document.getElementById('jaju-time')?.value || '';
+  const route   = document.getElementById('jaju-route')?.value || '';
+  const memo    = (document.getElementById('jaju-memo')?.value || '').trim();
 
   if (!name || !phone) { showToast('학생 이름과 연락처를 입력해주세요.'); return; }
   if (!school) { showToast('학교/학년을 입력해주세요.'); return; }
   if (!memo) { showToast('현재 상황 또는 상담 요청 사항을 입력해주세요.'); return; }
 
-  const fields = ['daum-name','daum-phone','daum-school','daum-subject','daum-time','daum-route','daum-memo'];
+  const fields = ['jaju-name','jaju-phone','jaju-school','jaju-subject','jaju-time','jaju-route','jaju-memo'];
   showToast('신청 중...');
   try {
     const { error } = await sb.from('enrollments').insert({
@@ -453,7 +453,7 @@ async function submitDaumApply() {
       subject, preferred_time: time, route, memo
     });
     if (error) throw error;
-    closeApplyModal('modal-daum-apply');
+    closeApplyModal('modal-jaju-apply');
     showToast('✅ 신청이 접수되었습니다! 2일 이내 연락드리겠습니다.');
     fields.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
   } catch(e) {
@@ -716,9 +716,9 @@ function openBlogPost(id) {
   goPage('blog', null);
 }
 
-/* ── 다움공부 수업안내 동적 로딩 ── */
-async function loadDaumCourses() {
-  const list = document.getElementById('daum-course-list');
+/* ── 자주국어 수업안내 동적 로딩 ── */
+async function loadJajuCourses() {
+  const list = document.getElementById('jaju-course-list');
   if (!list) return;
   try {
     const { data, error } = await sb.from('courses')
@@ -890,14 +890,14 @@ async function saveCourse() {
   closeModal('modal-course');
   showToast('✅ 저장되었습니다');
   loadAdminCourses();
-  loadDaumCourses();
+  loadJajuCourses();
 }
 
 async function deleteCourse(id) {
   if (!confirm('이 교과를 삭제할까요?')) return;
   const { error } = await sb.from('courses').delete().eq('id', id);
   if (error) { showToast('❌ ' + error.message); return; }
-  showToast('삭제되었습니다'); loadAdminCourses(); loadDaumCourses();
+  showToast('삭제되었습니다'); loadAdminCourses(); loadJajuCourses();
 }
 
 async function loadAdminBlog() {
@@ -1087,7 +1087,7 @@ async function updateStatus(table, id, status, reloadFn) {
 document.addEventListener('DOMContentLoaded', () => {
   loadHomeNotices();
   loadHomeBlog();
-  loadDaumCourses();
+  loadJajuCourses();
   // 세션 유지 확인 + /admin URL 자동 처리
   sb.auth.getSession().then(({ data }) => {
     if (data.session) {
