@@ -12,7 +12,7 @@ const CONFIG = {
   contact: {
     phone:   "010-7207-9004",
     email:   "baram@baramnamu.net",
-    address: "경기도 화성시 노각로 175, 1713호",
+    address: "경기도 용인시 기흥구 보라동",
     hours:   "월~토 10:00 – 21:00",
     kakao:   "바람나무숲 채널",
     website: "sup365.kr"
