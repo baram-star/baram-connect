@@ -193,7 +193,7 @@
         <div class="prog-card-icon prog-icon-teal"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
         <div class="prog-card-body">
           <div class="prog-card-name">자주국어</div>
-          <div class="prog-card-desc">초·중·고 개별 맞춤형 국어 논술 전문 교습소</div>
+          <div class="prog-card-desc">용인과 동탄 초5~중3 국어·독서·논술 교습소</div>
         </div>
         <div class="prog-card-arrow">›</div>
       </div>
@@ -216,33 +216,24 @@
     </div>
   </section>
 
-  <!-- ── 자주국어 ── -->
-  <!-- ── 자주국어 ── -->
+  <!-- ── 자주국어 (안내 카드 — 과정·상담 신청은 자주국어 홈페이지에서) ── -->
   <section class="page" id="page-jaju">
     <div class="subpage-hero">
       <div class="subpage-hero-icon" style="background:#eaf3fb;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
       <div class="subpage-hero-texts">
         <div class="subpage-hero-name">자주국어</div>
-        <div class="subpage-hero-desc">초·중·고 개별 맞춤형 국어 논술 전문 교습소</div>
+        <div class="subpage-hero-desc">용인과 동탄 초5~중3 국어·독서·논술 교습소</div>
       </div>
     </div>
 
-    <!-- 수업 안내 (Supabase 동적 로딩) -->
-    <div style="padding:0 16px;" id="jaju-course-section">
-      <div style="font-size:1.05rem;font-weight:800;color:var(--teal-d);padding:16px 0 10px;border-bottom:2px solid var(--teal);">수업 안내</div>
-      <!-- 교과 목록 (동적) -->
-      <div id="jaju-course-list" style="padding:4px 0;">
-        <div style="font-size:.82rem;color:var(--sub);padding:12px 0;">불러오는 중...</div>
-      </div>
-      <div style="border-top:1px solid var(--border);padding-top:16px;padding-bottom:20px;">
-        <button onclick="document.getElementById('modal-jaju-apply').classList.add('open');document.body.style.overflow='hidden';" style="width:100%;padding:13px;background:var(--teal);color:#fff;border:none;border-radius:12px;font-size:.95rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          수강 신청하기
-        </button>
+    <div style="padding:16px 16px 28px;">
+      <div style="background:var(--white,#fff);border:1px solid var(--border);border-radius:14px;padding:20px;">
+        <div style="font-size:1rem;font-weight:800;color:var(--navy);">스스로 날마다 귀하게</div>
+        <p style="margin:10px 0 0;font-size:.85rem;line-height:1.7;color:var(--sub);">자주국어는 바람나무숲 교육연구소의 국어·독서·논술 교습소입니다. 한 반 6명, 2027년 1월 예비중3반과 3월 정규반이 시작됩니다.</p>
+        <p style="margin:8px 0 0;font-size:.85rem;line-height:1.7;color:var(--sub);">과정 안내와 상담 신청은 자주국어 홈페이지에서 받습니다.</p>
+        <a href="https://baram-namusup.vercel.app/" target="_blank" rel="noopener" style="display:block;margin-top:16px;padding:13px;background:#7b2253;color:#fff;border-radius:10px;text-align:center;font-weight:700;font-size:.92rem;text-decoration:none;">자주국어 홈페이지로</a>
       </div>
     </div>
-
-    <!-- 수강 신청 폼 → 플로팅 버튼 클릭 시 바텀시트로 표시 -->
   </section>
 
   <section class="page" id="page-academy">
@@ -454,7 +445,6 @@
       <div class="form-group">
         <label class="form-label">문의 유형</label>
         <select class="form-input" id="contact-type">
-          <option value="자주국어수강">자주국어 수강 문의</option>
           <option value="인문학교실">인문학교실 참여 문의</option>
           <option value="교육상담">교육상담·컨설팅 신청</option>
           <option value="기타">기타 문의</option>
@@ -766,69 +756,6 @@
 <script src="app.js"></script>
 <!-- ── 플로팅 신청 버튼 ── -->
 <button class="float-apply" id="float-apply-btn" onclick="openApplyModal()">✏️ 신청하기</button>
-
-<!-- ── 자주국어 수강신청 바텀시트 ── -->
-<div class="apply-modal" id="modal-jaju-apply" onclick="if(event.target===this)closeApplyModal('modal-jaju-apply')">
-  <div class="apply-modal-box">
-    <div class="apply-modal-handle"></div>
-    <div class="apply-modal-title">
-      자주국어 수강신청
-      <button class="apply-modal-close" onclick="closeApplyModal('modal-jaju-apply')">×</button>
-    </div>
-    <div class="form-group">
-      <label class="form-label">학생 이름 *</label>
-      <input class="form-input" type="text" id="jaju-name" placeholder="이름을 입력하세요">
-    </div>
-    <div class="form-group">
-      <label class="form-label">학부모 연락처 *</label>
-      <input class="form-input" type="tel" id="jaju-phone" placeholder="010-0000-0000">
-    </div>
-    <div class="form-group">
-      <label class="form-label">학교 / 학년 *</label>
-      <input class="form-input" type="text" id="jaju-school" placeholder="예: OO초등학교 5학년 · OO중학교 2학년">
-    </div>
-    <div class="form-group">
-      <label class="form-label">희망 과목</label>
-      <select class="form-input" id="jaju-subject">
-        <option value="">희망 과목을 선택하세요</option>
-        <option value="독서글쓰기">독서 &amp; 글쓰기 (초등)</option>
-        <option value="학습독서논술">학습 독서 &amp; 논술 (중등)</option>
-        <option value="내신국어">내신 국어 집중 (중·고등)</option>
-        <option value="수능국어">수능 국어 완성 (고등)</option>
-        <option value="논술입시">논술 입시 대비 (고등)</option>
-        <option value="자기소개서">자기소개서 &amp; 학생부 (고등)</option>
-        <option value="상담후결정">상담 후 결정</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label class="form-label">희망 수업 시간대</label>
-      <select class="form-input" id="jaju-time">
-        <option value="">선호 시간대를 선택하세요</option>
-        <option value="평일오전">평일 오전 (10:00~13:00)</option>
-        <option value="평일오후">평일 오후 (14:00~18:00)</option>
-        <option value="평일저녁">평일 저녁 (18:00~21:00)</option>
-        <option value="토요일">토요일 (10:00~18:00)</option>
-        <option value="협의">협의 가능</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label class="form-label">참여 경로</label>
-      <select class="form-input" id="jaju-route">
-        <option value="">어떻게 알게 되셨나요?</option>
-        <option value="지인추천">지인 추천</option>
-        <option value="SNS">SNS (인스타그램·블로그 등)</option>
-        <option value="검색">인터넷 검색</option>
-        <option value="기존참여">이전 참여 경험</option>
-        <option value="기타">기타</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label class="form-label">현재 상황 &amp; 상담 요청 사항 *</label>
-      <textarea class="form-input" id="jaju-memo" rows="3" placeholder="학생의 현재 학습 상황, 어려운 점, 원하는 목표 등을 자유롭게 써 주세요." style="resize:none"></textarea>
-    </div>
-    <button class="form-submit" onclick="submitJajuApply()">수강 신청하기 →</button>
-  </div>
-</div>
 
 <!-- ── 상담신청 바텀시트 ── -->
 <div class="apply-modal" id="modal-consult-apply" onclick="if(event.target===this)closeApplyModal('modal-consult-apply')">
