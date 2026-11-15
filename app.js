@@ -18,6 +18,9 @@ const CONFIG = {
     website: "sup365.kr"
   },
 
+  /* ── Growpath(자주국어 수강생·학부모 앱) 주소 — 서브도메인 연결 후 이 값만 바꾸면 됩니다 ── */
+  growpathUrl: "https://growpath-pi.vercel.app",
+
   /* ── 메뉴 이름 (사이드바·헤더에 자동 반영) ── */
   menus: {
     home:    "홈",
@@ -250,43 +253,6 @@ function goPage(id, navEl){
   if(navEl) navEl.classList.add('active');
   window.scrollTo(0,0);
   closeSidebar();
-  // 플로팅 신청 버튼 — jaju/consult 페이지에서만 표시
-  const floatBtn = document.getElementById('float-apply-btn');
-  if(floatBtn){
-    const showPages = ['consult'];
-    const labels = {consult:'💬 상담 신청'};
-    if(showPages.includes(id)){
-      floatBtn.textContent = labels[id] || '✏️ 신청하기';
-      floatBtn.dataset.page = id;
-      floatBtn.classList.add('visible');
-    } else {
-      floatBtn.classList.remove('visible');
-    }
-  }
-}
-
-/* ── 신청 모달 열기/닫기 ── */
-function openApplyModal(){
-  const page = document.getElementById('float-apply-btn')?.dataset.page;
-  const modalId = page === 'consult' ? 'modal-consult-apply' : 'modal-jaju-apply';
-  document.getElementById(modalId)?.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeApplyModal(id){
-  document.getElementById(id)?.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-/* ── 상담 유형 카드 선택 ── */
-function selectConsultType(el){
-  document.querySelectorAll('.type-select-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  const type = el.dataset.type;
-  // 신청 모달의 select 자동 선택
-  const sel = document.getElementById('consult-type');
-  if(sel) sel.value = type;
-  // 0.25초 후 신청 모달 열기
-  setTimeout(() => openApplyModal(), 280);
 }
 
 /* ── 칩 탭 ── */
@@ -392,29 +358,6 @@ function toggleFaq(el){ el.classList.toggle('open'); }
 /* ── 토스트 ── */
 let toastTimer;
 
-/* ── 인문학교실 참여 신청 ── */
-async function submitConsultApply() {
-  const name  = (document.getElementById('consult-name')?.value || '').trim();
-  const phone = (document.getElementById('consult-phone')?.value || '').trim();
-  const child = (document.getElementById('consult-child')?.value || '').trim();
-  const type  = document.getElementById('consult-type')?.value || '';
-  const memo  = (document.getElementById('consult-memo')?.value || '').trim();
-  if (!name || !phone) { showToast('이름과 연락처를 입력해주세요.'); return; }
-  if (!memo) { showToast('상담 희망 내용을 입력해주세요.'); return; }
-  const fields = ['consult-name','consult-phone','consult-child','consult-type','consult-memo'];
-  showToast('신청 중...');
-  try {
-    const { error } = await sb.from('consultations').insert({
-      name, phone, child_name: child, consult_type: type, memo
-    });
-    if (error) throw error;
-    closeApplyModal('modal-consult-apply');
-    document.querySelectorAll('.type-select-card').forEach(c => c.classList.remove('selected'));
-    showToast('✅ 상담 신청이 접수되었습니다! 1~2일 이내 연락드리겠습니다.');
-    fields.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-  } catch(e) { showToast('오류가 발생했습니다. 전화로 문의해주세요.'); }
-}
-
 async function submitContact() {
   const name  = (document.getElementById('contact-name')?.value || '').trim();
   const phone = (document.getElementById('contact-phone')?.value || '').trim();
@@ -432,35 +375,7 @@ async function submitContact() {
   } catch(e) { showToast('오류가 발생했습니다. 전화로 문의해주세요.'); }
 }
 
-async function submitJajuApply() {
-  const name    = (document.getElementById('jaju-name')?.value || '').trim();
-  const phone   = (document.getElementById('jaju-phone')?.value || '').trim();
-  const school  = (document.getElementById('jaju-school')?.value || '').trim();
-  const subject = document.getElementById('jaju-subject')?.value || '';
-  const time    = document.getElementById('jaju-time')?.value || '';
-  const route   = document.getElementById('jaju-route')?.value || '';
-  const memo    = (document.getElementById('jaju-memo')?.value || '').trim();
-
-  if (!name || !phone) { showToast('학생 이름과 연락처를 입력해주세요.'); return; }
-  if (!school) { showToast('학교/학년을 입력해주세요.'); return; }
-  if (!memo) { showToast('현재 상황 또는 상담 요청 사항을 입력해주세요.'); return; }
-
-  const fields = ['jaju-name','jaju-phone','jaju-school','jaju-subject','jaju-time','jaju-route','jaju-memo'];
-  showToast('신청 중...');
-  try {
-    const { error } = await sb.from('enrollments').insert({
-      type: 'daum', student_name: name, phone, school,
-      subject, preferred_time: time, route, memo
-    });
-    if (error) throw error;
-    closeApplyModal('modal-jaju-apply');
-    showToast('✅ 신청이 접수되었습니다! 2일 이내 연락드리겠습니다.');
-    fields.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-  } catch(e) {
-    showToast('오류가 발생했습니다. 전화로 문의해주세요.');
-  }
-}
-
+/* ── 인문학교실 참가 신청 ── */
 async function submitApply() {
   const name   = (document.getElementById('apply-name')?.value || '').trim();
   const phone  = (document.getElementById('apply-phone')?.value || '').trim();
@@ -1085,6 +1000,7 @@ async function updateStatus(table, id, status, reloadFn) {
 
 /* ── 앱 시작 시 공지 로드 ── */
 document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('a[data-link="growpath"]').forEach(a => { a.href = CONFIG.growpathUrl; });
   loadHomeNotices();
   loadHomeBlog();
   loadJajuCourses();
