@@ -19,7 +19,7 @@ const CONFIG = {
   },
 
   /* ── Growpath(자주국어 수강생·학부모 앱) 주소 — 서브도메인 연결 후 이 값만 바꾸면 됩니다 ── */
-  growpathUrl: "https://growpath-pi.vercel.app",
+  growpathUrl: "https://app.jajugugeo.kr",
 
   /* ── 메뉴 이름 (사이드바·헤더에 자동 반영) ── */
   menus: {
